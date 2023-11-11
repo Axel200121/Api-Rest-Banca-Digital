@@ -13,7 +13,13 @@ import java.util.List;
 
 public interface CuentaBancariaService {
 
-    Cliente saveCliente(Cliente cliente);
+    ClienteDTO saveCliente(ClienteDTO clienteDTO);
+
+    ClienteDTO  getCliente(Long idCliente) throws  ClienteNotFoundException;
+
+    ClienteDTO updateCliente(ClienteDTO clienteDTO);
+
+    void deleteCliente(Long idCliente);
 
     CuentaActual saveCuentaBancariaActual(double balanceInicial, double sobregiro, Long idCliente) throws ClienteNotFoundException;
 
