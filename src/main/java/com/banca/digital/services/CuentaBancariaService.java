@@ -1,6 +1,9 @@
 package com.banca.digital.services;
 
 import com.banca.digital.dto.ClienteDTO;
+import com.banca.digital.dto.CuentaActualDTO;
+import com.banca.digital.dto.CuentaAhorroDTO;
+import com.banca.digital.dto.CuentaBancariaDTO;
 import com.banca.digital.entities.Cliente;
 import com.banca.digital.entities.CuentaActual;
 import com.banca.digital.entities.CuentaAhorro;
@@ -21,13 +24,13 @@ public interface CuentaBancariaService {
 
     void deleteCliente(Long idCliente);
 
-    CuentaActual saveCuentaBancariaActual(double balanceInicial, double sobregiro, Long idCliente) throws ClienteNotFoundException;
+    CuentaActualDTO saveCuentaBancariaActual(double balanceInicial, double sobregiro, Long idCliente) throws ClienteNotFoundException;
 
-    CuentaAhorro saveCuentaBancariaAhorro(double balanceInicial, double tasaInteres, Long idCliente) throws ClienteNotFoundException;
+    CuentaAhorroDTO saveCuentaBancariaAhorro(double balanceInicial, double tasaInteres, Long idCliente) throws ClienteNotFoundException;
 
     List<ClienteDTO> listClientes();
 
-    CuentaBancaria getCuentaBancaria(String idCuenta) throws CuentaBancariaNotFoundException;
+    CuentaBancariaDTO getCuentaBancaria(String idCuenta) throws CuentaBancariaNotFoundException;
 
     void debit(String idCuenta, double monto, String descripcion) throws  CuentaBancariaNotFoundException, BalanceInsuficienteException;
 
@@ -35,5 +38,5 @@ public interface CuentaBancariaService {
 
     void transfer(String idCuentaPropietario, String idCuentaDestinatario, double monto) throws CuentaBancariaNotFoundException,BalanceInsuficienteException;
 
-    List<CuentaBancaria> listCuentasBancarias();
+    List<CuentaBancariaDTO> listCuentasBancarias();
 }

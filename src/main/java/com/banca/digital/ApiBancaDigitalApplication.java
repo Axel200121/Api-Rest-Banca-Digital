@@ -1,6 +1,9 @@
 package com.banca.digital;
 
 import com.banca.digital.dto.ClienteDTO;
+import com.banca.digital.dto.CuentaActualDTO;
+import com.banca.digital.dto.CuentaAhorroDTO;
+import com.banca.digital.dto.CuentaBancariaDTO;
 import com.banca.digital.entities.*;
 import com.banca.digital.enums.EstadoCuenta;
 import com.banca.digital.enums.TipoOperacion;
@@ -49,11 +52,17 @@ public class ApiBancaDigitalApplication {
 				try {
 					cuentaBancariaService.saveCuentaBancariaActual(Math.random() * 90000, 9000, cliente1.getId());
 					cuentaBancariaService.saveCuentaBancariaAhorro(120000,5.5, cliente1.getId());
-					List<CuentaBancaria> cuentaBancarias = cuentaBancariaService.listCuentasBancarias();
-					for (CuentaBancaria cuentaBancaria: cuentaBancarias){
+					List<CuentaBancariaDTO> cuentaBancarias = cuentaBancariaService.listCuentasBancarias();
+					for (CuentaBancariaDTO cuentaBancaria: cuentaBancarias){
 						for (int i = 0; i<10; i++){
-							cuentaBancariaService.credit(cuentaBancaria.getId(), 10000+Math.random()*120000,"Credito");
-							cuentaBancariaService.debit(cuentaBancaria.getId(), 1000+Math.random()*9000,"Debito");
+							String idCuenta;
+							if (cuentaBancaria instanceof CuentaAhorroDTO){
+								idCuenta = String.valueOf(((CuentaAhorroDTO) cuentaBancaria).getId());
+							}else{
+								idCuenta = String.valueOf(((CuentaActualDTO) cuentaBancaria).getId());
+							}
+							cuentaBancariaService.credit(idCuenta, 10000+Math.random()*120000,"Credito");
+							cuentaBancariaService.debit(idCuenta, 1000+Math.random()*9000,"Debito");
 						}
 					}
 				}catch (Exception e){
