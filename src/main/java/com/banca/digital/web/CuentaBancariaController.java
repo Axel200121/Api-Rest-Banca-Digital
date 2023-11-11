@@ -1,6 +1,7 @@
 package com.banca.digital.web;
 
 import com.banca.digital.dto.CuentaBancariaDTO;
+import com.banca.digital.dto.OperacionCuentaDTO;
 import com.banca.digital.exceptions.CuentaBancariaNotFoundException;
 import com.banca.digital.services.CuentaBancariaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,8 @@ public class CuentaBancariaController {
         return  cuentaBancariaService.listCuentasBancarias();
     }
 
-
+    /*@GetMapping("/cuentas/{idCuenta}/operaciones")
+    public List<OperacionCuentaDTO> listarHistorialDeCuenta(@PathVariable String idCuenta){
+        return  cuentaBancariaService.listHistorialDeCuenta(idCuenta);
+    }*/
 }

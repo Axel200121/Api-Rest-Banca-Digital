@@ -3,9 +3,11 @@ package com.banca.digital.mappers;
 import com.banca.digital.dto.ClienteDTO;
 import com.banca.digital.dto.CuentaActualDTO;
 import com.banca.digital.dto.CuentaAhorroDTO;
+import com.banca.digital.dto.OperacionCuentaDTO;
 import com.banca.digital.entities.Cliente;
 import com.banca.digital.entities.CuentaActual;
 import com.banca.digital.entities.CuentaAhorro;
+import com.banca.digital.entities.OperacionCuenta;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +62,14 @@ public class CuentaBancariaMapperImpl {
         cuentaActual.setCliente(mapearDeClienteDTO(cuentaActualDTO.getClienteDTO()));
         return  cuentaActual;
     }
+
+    public OperacionCuentaDTO mapearDeOperacionCuentaa(OperacionCuenta operacionCuenta){
+        OperacionCuentaDTO operacionCuentaDTO = new OperacionCuentaDTO();
+        BeanUtils.copyProperties(operacionCuenta,operacionCuentaDTO);
+        return operacionCuentaDTO;
+    }
+
+
 
 
 }
