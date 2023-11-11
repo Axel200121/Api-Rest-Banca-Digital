@@ -2,6 +2,7 @@ package com.banca.digital.services;
 
 import com.banca.digital.entities.Cliente;
 import com.banca.digital.entities.CuentaActual;
+import com.banca.digital.entities.CuentaAhorro;
 import com.banca.digital.entities.CuentaBancaria;
 import com.banca.digital.exceptions.BalanceInsuficienteException;
 import com.banca.digital.exceptions.ClienteNotFoundException;
@@ -15,7 +16,7 @@ public interface CuentaBancariaService {
 
     CuentaActual saveCuentaBancariaActual(double balanceInicial, double sobregiro, Long idCliente) throws ClienteNotFoundException;
 
-    CuentaActual saveCuentaBancariaAhorro(double balanceInicial, double tasaInteres, Long idCliente) throws ClienteNotFoundException;
+    CuentaAhorro saveCuentaBancariaAhorro(double balanceInicial, double tasaInteres, Long idCliente) throws ClienteNotFoundException;
 
     List<Cliente> listClientes();
 
