@@ -26,6 +26,6 @@ public class Cliente {
     //Un cliente tiene muchas cuentas bancarias
     //mappedBy -> Hace referencia a la relacion entre clases
     @OneToMany(mappedBy = "cliente")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<CuentaBancaria> cuentasBancarias;
 }

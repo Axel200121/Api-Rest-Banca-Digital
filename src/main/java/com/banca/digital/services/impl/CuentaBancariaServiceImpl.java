@@ -1,10 +1,12 @@
 package com.banca.digital.services.impl;
 
+import com.banca.digital.dto.ClienteDTO;
 import com.banca.digital.entities.*;
 import com.banca.digital.enums.TipoOperacion;
 import com.banca.digital.exceptions.BalanceInsuficienteException;
 import com.banca.digital.exceptions.ClienteNotFoundException;
 import com.banca.digital.exceptions.CuentaBancariaNotFoundException;
+import com.banca.digital.mappers.CuentaBancariaMapperImpl;
 import com.banca.digital.repositories.ClienteRepository;
 import com.banca.digital.repositories.CuentaBancariaRepository;
 import com.banca.digital.repositories.OperacionCuentaRepository;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -31,6 +34,9 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService {
 
     @Autowired
     private OperacionCuentaRepository operacionCuentaRepository;
+
+    @Autowired
+    private CuentaBancariaMapperImpl cuentaBancariaMapper;
 
 
 
@@ -84,8 +90,12 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService {
     }
 
     @Override
-    public List<Cliente> listClientes() {
-        return  clienteRepository.findAll();
+    public List<ClienteDTO> listClientes() {
+        List<Cliente> clientes = clienteRepository.findAll();
+        List<ClienteDTO> clienteDTOS = clientes.stream()
+                .map(cliente -> cuentaBancariaMapper.mapearDeCliente(cliente))
+                .collect(Collectors.toList());
+        return  clienteDTOS;
     }
 
     @Override
