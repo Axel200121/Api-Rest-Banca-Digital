@@ -11,3 +11,4 @@ public interface OperacionCuentaRepository extends JpaRepository<OperacionCuenta
 
     //List<OperacionCuenta> findByCuentaBancaria(String idCuenta);
 
+}
